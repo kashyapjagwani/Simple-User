@@ -7,14 +7,18 @@
       @click="showModal = true"
     ></q-btn>
     <div v-for="user in getUsers" :key="user.name">
-      <q-card class="q-mb-sm text-center cursor-pointer" style="width:300px">
+      <q-card
+        @click="goToUser(user.name)"
+        class="q-mb-sm text-center cursor-pointer"
+        style="width:300px"
+      >
         <q-item clickable>
           <q-item-section>
             <q-item-label>Name: {{ user.name }}</q-item-label>
             <q-item-label caption lines="2">Age: {{ user.age }}</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-icon name="delete" @click="deleteUser(user.name)" />
+            <q-icon name="delete" @click.stop="deleteUser(user.name)" />
           </q-item-section>
         </q-item>
       </q-card>
@@ -97,6 +101,9 @@ export default {
       });
       this.showModal = false;
       (this.name = null), (this.age = null);
+    },
+    goToUser(name) {
+      this.$router.push(`/${name}`);
     }
   }
 };

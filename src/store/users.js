@@ -20,6 +20,10 @@ const mutations = {
     let newState = state.users.findIndex(user => user.name === payload);
     state.users.splice(newState, 1);
     Vue.set(state, "users", state.users);
+  },
+  EDIT_USER(state, payload) {
+    let newState = state.users.findIndex(user => user.name === payload.name);
+    state.users[newState].age = payload.age;
   }
 };
 
@@ -29,6 +33,9 @@ const actions = {
   },
   delete_user({ commit }, payload) {
     commit("DELETE_USER", payload);
+  },
+  edit_user({ commit }, payload) {
+    commit("EDIT_USER", payload);
   }
 };
 
